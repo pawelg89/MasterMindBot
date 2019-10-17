@@ -25,20 +25,31 @@ struct GuessResult {
  */
 class MasterMindBot {
  public:
+  /**
+   * @brief Construct bot with initial random state to guess.
+   */
   MasterMindBot() : solution_(RollSolution()) {}
 
   /**
    * @brief Checks how many hits and pseudohits guess have relative to solution.
-   * @param guess your guess, eg "RRGG"
-   * @return GuessResult @see GuessResult
+   * @param guess your guess, eg "RRGG".
+   * @return GuessResult @see GuessResult.
    */
   GuessResult CheckInput(const std::string &guess);
 
+  /**
+   * @brief Reset solution_ to a new random state.
+   */
   void NewGame();
  
  private:
+  /**
+   * @brief Generate a random color combination with repetitions.
+   * @return Random solution in form of "RGBY" string.
+   */
   std::string RollSolution();
 
+  /// Holds a set of colors that player is guessing.
   std::string solution_;
 };
 }  // namespace mmb
