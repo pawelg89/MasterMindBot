@@ -3,10 +3,16 @@
 #include <string>
 
 namespace mmb {
-/**
- * @brief Holds list of all available colors.
- */
-constexpr std::array<char, 4> kLegalColors = {'B', 'G', 'R', 'Y'};
+/// All allowed color tags.
+constexpr std::array<char, 4> kLegalColors = {
+  'B', 'G', 'R', 'Y'
+};
+/// All allowed color names (just for printing)
+constexpr std::array<const char*, 4> kLegalColorsNames = {
+  "Blue", "Green", "Red", "Yellow"
+};
+static_assert(kLegalColors.size() == kLegalColorsNames.size(),
+              "Each color tag must have a full name, eg. 'B' -> Blue.");
 
 /**
  * @brief Structure that represents a guess result.
