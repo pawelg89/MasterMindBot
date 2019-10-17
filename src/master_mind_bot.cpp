@@ -1,6 +1,7 @@
 #include "master_mind_bot.h"
 
 #include <algorithm>
+#include <chrono>
 #include <map>
 
 namespace mmb {
@@ -34,7 +35,8 @@ std::string MasterMindBot::RollSolution() {
   constexpr size_t sol_size = 4; //for now only 4
   std::string result;
   for (size_t i = 0; i < sol_size; i++)
-    result += kLegalColors[std::rand() % kLegalColors.size()];
+    result += kLegalColors[std::chrono::high_resolution_clock::now()
+        .time_since_epoch().count() % std::rand() % kLegalColors.size()];
   return result;
 }
 
