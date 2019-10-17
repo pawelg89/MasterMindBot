@@ -23,6 +23,8 @@ GuessResult MasterMindBot::CheckInput(const std::string &guess) {
   for (const auto &pair : sol_colors) {
     pseudohits += std::min(pair.second, gss_colors[pair.first]);
   }
+  ++num_guesses_;
+  if (hits == sol_size) PrintCongrats();
   return GuessResult(std::move(hits), std::move(pseudohits));
 }
 
@@ -32,12 +34,18 @@ void MasterMindBot::NewGame() {
 }
 
 std::string MasterMindBot::RollSolution() {
-  constexpr size_t sol_size = 4; //for now only 4
+  num_guesses_ = 0;
   std::string result;
   for (size_t i = 0; i < sol_size; i++)
     result += kLegalColors[std::chrono::high_resolution_clock::now()
         .time_since_epoch().count() % std::rand() % kLegalColors.size()];
   return result;
+}
+
+void MasterMindBot::PrintCongrats() {
+  std::cout << "!!! CONGRATULATIONS !!!\nYou guessed my pick '" << solution_ 
+      << "' in " << num_guesses_ << " guesses. Wanna play again?"
+      << "\nType 'new_game' to restart." << std::endl;
 }
 
 }  // namespace mmb

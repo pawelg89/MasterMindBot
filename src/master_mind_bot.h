@@ -42,6 +42,9 @@ class MasterMindBot {
    */
   void NewGame();
  
+  /// Number of colors in the solution.
+  const size_t sol_size = 4;
+
  private:
   /**
    * @brief Generate a random color combination with repetitions.
@@ -49,7 +52,15 @@ class MasterMindBot {
    */
   std::string RollSolution();
 
+  /**
+   * @brief Print a congrats message with a bunch of statistics.
+   * Give number of guesses it took to win.
+   */
+  void PrintCongrats();
+
   /// Holds a set of colors that player is guessing.
   std::string solution_;
+  /// Holds number of guesses, increases with each call to CheckInput.
+  size_t num_guesses_; 
 };
 }  // namespace mmb

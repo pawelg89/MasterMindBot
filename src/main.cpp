@@ -19,6 +19,7 @@ int main() {
       case Flag::kQuit:       { return 0; }
       case Flag::kNotAFlag:   {
         auto guess_result = bot.CheckInput(in);
+        if (guess_result.num_hits != bot.sol_size)
         std::cout << "Hits: " << guess_result.num_hits
                   << ", Pseudohits: " << guess_result.num_pseudohits
                   << std::endl;
@@ -43,9 +44,11 @@ Flag HandleFlags(const std::string &input, mmb::MasterMindBot &bot) {
 
 void PrintHelp() {
   std::cout <<
-      "Hello! This is the MasterMind game."
-      "q/Q      - quit game"
-      "h/H      - print this message"
-      "new_game - reset bot's solution and start a new game"
+      "Hello! This is the MasterMind game.\n"
+      "q/Q      - quit game\n"
+      "h/H      - print this message\n"
+      "new_game - reset bot's solution and start a new game\n"
+      "I'm picking a colors combination, you guess. You can take as much time"
+      " as you like. Go ahead, guess! Good luck."
   << std::endl;
 }
